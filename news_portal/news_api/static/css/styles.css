@@ -1,0 +1,299 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap");
+/* styles.css */
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: Lora, sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  background-color: #f4f4f4;
+  padding: 20px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  font-family: "Roboto", sans-serif;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  background-color: #0c335c;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  outline: none;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.button:focus {
+  border: 2px solid #0056b3;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.dropdown-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown label {
+  margin-bottom: 5px;
+}
+
+.dropdown select {
+  padding: 10px;
+  width: 200px;
+}
+
+.results-section {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #e1e1e1;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.results-header {
+  padding: 10px 0;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 10px;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  display: block; /* or inline-block */
+  margin-left: 10px;
+}
+
+.result {
+  padding: 10px;
+  border: 2px solid #bfeee2;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.result-image {
+  width: 100px; /* Adjust as needed */
+  height: 100px; /* Adjust as needed */
+  background-color: #e1e1e1;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #555;
+}
+
+.result-content {
+  flex-grow: 1;
+}
+
+.title {
+  font-size: 20px;
+  margin: 0;
+  color: #007bff; /* Bootstrap primary color */
+}
+
+.summary {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.source {
+  font-size: 14px;
+  color: #666;
+}
+
+/* CSS cho button Tìm kiếm */
+
+.search-btn {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-btn:hover {
+  background-color: #2980b9;
+}
+
+.search-btn:active {
+  background-color: #2980b9;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Ẩn nội dung ban đầu */
+/* .main-content {
+display: none;
+} */
+
+/* Hiện nội dung khi nút được nhấn */
+.button.news-aggregator:active ~ .main-content {
+  display: block;
+}
+
+.gen-newsfeed {
+  display: none;
+}
+
+/* Hiện nội dung khi nút được nhấn */
+.button.gen-newsfeed:active ~ .gen-newsfeed {
+  display: block;
+}
+
+.time-published {
+  float: right;
+}
+
+.rounded-image {
+  border-radius: 20px; /* Điều chỉnh giá trị này để thay đổi độ bo của ảnh */
+  overflow: hidden; /* Đảm bảo hình ảnh được hiển thị bên trong phần bo */
+  border: 1px solid #00b7ff; /* Định dạng viền màu xanh (#00ff00) và độ rộng (1px) */
+}
+
+.results-container {
+  max-height: 800px; /* Đặt kích thước cố định cho phần tử */
+  overflow: auto; /* Tự động tạo thanh cuộn khi cần */
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown-button {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 0;
+}
+
+.dropdown-content li {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Hiển thị danh sách các tùy chọn khi nút dropdown được click */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Kiểu dáng riêng cho class .dropdown */
+.dropdown {
+  width: 200px;
+  margin-right: 10px;
+}
+
+.dropdown-button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.dropdown-content {
+  width: 200px;
+}
+
+.text-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.text-box label {
+  margin-bottom: 5px;
+}
+
+.text-box input {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #333;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    /* Styles for screens that are 768px wide or less */
+    .sidebar {
+      /* Example: Stack the sidebar vertically on small screens */
+      width: 100%;
+    }
+    .button {
+      /* Example: Adjust button sizes for small screens */
+      width: 100%;
+      padding: 12px;
+    }
+    .main-content {
+      /* Example: Adjust main content layout for small screens */
+      margin: 0;
+    }
+    /* Additional responsive styles */
+  }
+  

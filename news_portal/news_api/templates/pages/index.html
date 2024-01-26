@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Aggregation Interface</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <button class="button news-aggregator" action = "{% url 'reset_page' %}">Tổng hợp tin</button>
+        <button class="button gen-newsfeed">Tạo bài viết</button>
+        <button class="button">Xử lý ảnh</button>
+        <button class="button">Xử lý âm thanh, giọng nói</button>
+        <button class="button">OCR</button>
+        <button class="button">Viết tài liệu</button>
+      </div>
+      <div class="main-content">
+        <form method="post" action="{% url 'search' %}">
+          {% csrf_token %}
+          <div class="dropdown-section">
+            <div class="dropdown">
+              <label for="sort">Sắp xếp</label>
+              <select id="sort" name="sort">
+                <option value="trending">Phổ biến nhất</option>
+                <option value="newnews">Mới nhất</option>
+              </select>
+            </div>
+            <div class="text-box">
+              <label for="keyword">Từ khóa:</label>
+              <input type="text" id="keyword" name="keyword" />
+            </div>
+            {% comment %} <div class="dropdown">
+              <label for="category">Lĩnh vực:</label>
+              <select id="category" name="category">
+                <option value="" selected disabled></option>
+                <option value="economics">Kinh tế</option>
+                <option value="politics">Chính trị</option>
+                <option value="military">Quân sự</option>
+                <option value="medical">Y tế</option>
+                <option value="education">Giáo dục</option>
+                <option value="sport">Thể thao</option>
+                <!-- Add other categories as needed -->
+              </select>
+            </div> {% endcomment %}
+            <div class="dropdown">
+              <label for="area">Khu vực:</label>
+              <select id="area" name="area">
+                <option value="2704">Việt Nam</option>
+                <option value="2826">Vương Quốc Anh</option>
+                <option value="2250">Pháp</option>
+                {% comment %}
+                <option value="3166">Nga</option>
+                {% endcomment %}
+                <option value="2392">Nhật Bản</option>
+                <option value="2410">Hàn Quốc</option>
+                {% comment %}
+                <option value="vietnam">Trung Quốc</option>
+                {% endcomment %}
+                <!-- Add other countries as needed -->
+              </select>
+            </div>
+            <div class="dropdown">
+              <label for="language">Ngôn ngữ:</label>
+              <select id="language" name="language">
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">Tiếng Anh</option>
+                <option value="fr">Tiếng Pháp</option>
+                {% comment %}
+                <option value="vietnam">Tiếng Nga</option>
+                {% endcomment %}
+                <option value="ja">Tiếng Nhật</option>
+                <option value="ko">Tiếng Hàn</option>
+                {% comment %}
+                <option value="vietnam">Tiếng Trung</option>
+                {% endcomment %}
+                <!-- Add other countries as needed -->
+              </select>
+            </div>
+            <div class="dropdown">
+              <label for="count">Số lượng bài</label>
+              <select id="count" name="count">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+                <!-- Add other countries as needed -->
+              </select>
+            </div>
+          </div>
+          <button class="search-btn" type="submit" name="submit">Tìm kiếm</button>
+        </form>
+        <!-- Hiển thị kết quả -->
+        <div class="results-section">
+          <div class="results-header">
+            <span class="header-title">Kết quả</span>
+            <div class="results-container">
+              {% for item in api_data %}
+              <div class="result">
+                <div class="result-image rounded-image">
+                  <a href="{{ item.url }}" target="_blank">
+                    <img src="{{ item.image_url }}" alt="Image" />
+                  </a>
+                </div>
+                <div class="result-content">
+                  <h2 class="title">
+                    <a
+                      href="{{ item.url }}"
+                      target="_blank"
+                      style="text-decoration: none"
+                      >{{ item.title }}</a
+                    >
+                  </h2>
+                  <p class="summary">{{ item.snippet }}</p>
+                  <span class="source">{{ item.domain }}</span>
+                  <span class="time-published" style="float: right"
+                    >{{ item.time_published }}</span
+                  >
+                </div>
+              </div>
+              {% endfor %}
+              <!-- Duplicate the above div as needed for each result -->
+            </div>
+          </div>
+        </div>
+        <!-- Hết hiển thị kết quả -->
+      </div>
+      <div class="gen-newsfeed"></div>
+    </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
+  </body>
+</html>
